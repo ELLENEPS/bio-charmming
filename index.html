@@ -69,7 +69,7 @@
         <div class="dots-menu" aria-hidden="true"><span></span><span></span><span></span></div>
       </a>
 
-      <!-- CARD DE RASTREIO FRENET -->
+      <!-- CARD DE RASTREIO FRENET (DIRETO) -->
       <div class="tracking-card">
         <div class="tracking-header" onclick="toggleTracking()">
           <div class="icon-wrapper outline-pink">
@@ -86,21 +86,9 @@
 
         <!-- Área Expansível do Rastreio -->
         <div class="tracking-content" id="trackingContent">
-          <!-- Seleção de Transportadora -->
-          <div class="tracking-select-group">
-            <select id="carrierSelect">
-              <option value="CORREIOS">Correios</option>
-              <option value="JT">J&T Express</option>
-              <option value="JADLOG">Jadlog</option>
-              <option value="LOGGI">Loggi</option>
-              <option value="IMILE">iMile</option>
-            </select>
-          </div>
-
-          <!-- Campo de Código e Botão -->
           <div class="tracking-input-group">
-            <input type="text" id="trackingCodeInput" placeholder="Digite seu código..." />
-            <button onclick="fetchTracking()">Buscar</button>
+            <input type="text" id="trackingCodeInput" placeholder="Digite seu código de rastreio..." />
+            <button onclick="redirectToFrenet()">Rastrear</button>
           </div>
           <div id="trackingResult" class="tracking-result"></div>
         </div>
@@ -178,6 +166,7 @@
 
   <!-- Scripts -->
   <script>
+    // Script para Copiar Cupom
     function copyCoupon() {
       const couponCode = "BEMVINDA";
       const btn = document.getElementById("copyBtn");
@@ -195,6 +184,7 @@
       });
     }
 
+    // Toggle para expandir/recolher a caixinha de Rastreio
     function toggleTracking() {
       const content = document.getElementById("trackingContent");
       const chevron = document.getElementById("trackingChevron");
@@ -202,52 +192,21 @@
       chevron.classList.toggle("open");
     }
 
-    async function fetchTracking() {
+    // Redirecionamento Direto para o Rastreio Oficial da Frenet
+    function redirectToFrenet() {
       const codeInput = document.getElementById("trackingCodeInput").value.trim();
-      const carrierSelect = document.getElementById("carrierSelect").value;
       const resultDiv = document.getElementById("trackingResult");
 
       if (!codeInput) {
-        resultDiv.innerHTML = `<p class="error-msg">Por favor, digite o código de rastreio.</p>`;
+        resultDiv.innerHTML = `<p class="error-msg">Por favor, digite seu código de rastreio.</p>`;
         return;
       }
 
-      resultDiv.innerHTML = `<p class="loading-msg">Consultando rastreio...</p>`;
-
-      try {
-        const url = `/api/tracking?code=${encodeURIComponent(codeInput)}&service=${encodeURIComponent(carrierSelect)}`;
-        const response = await fetch(url);
-        const data = await response.json();
-
-        if (response.ok && data.TrackingEvents && data.TrackingEvents.length > 0) {
-          let eventsHTML = `<div class="events-list">`;
-          data.TrackingEvents.forEach(evt => {
-            const date = evt.EventDateTime || evt.date || '';
-            const desc = evt.EventDescription || evt.description || evt.Status || '';
-            const loc = evt.EventLocation || evt.location || '';
-            eventsHTML += `
-              <div class="event-item">
-                <div class="event-date">${date}</div>
-                <div class="event-desc"><strong>${desc}</strong></div>
-                <div class="event-location">${loc}</div>
-              </div>
-            `;
-          });
-          eventsHTML += `</div>`;
-          resultDiv.innerHTML = eventsHTML;
-        } else if (data.directUrl) {
-          resultDiv.innerHTML = `
-            <div class="direct-track">
-              <p>${data.message}</p>
-              <a href="${data.directUrl}" target="_blank" rel="noopener" class="track-direct-btn">Abrir Rastreio Oficial</a>
-            </div>
-          `;
-        } else {
-          resultDiv.innerHTML = `<p class="error-msg">Nenhuma movimentação localizada no momento. Verifique o código e a transportadora.</p>`;
-        }
-      } catch (err) {
-        resultDiv.innerHTML = `<p class="error-msg">Erro ao realizar a busca. Tente novamente.</p>`;
-      }
+      resultDiv.innerHTML = "";
+      
+      // Abre a página oficial de rastreio da Frenet em uma nova aba com o código preenchido
+      const frenetUrl = `https://rastreio.frenet.com.br/?tracking=${encodeURIComponent(codeInput)}`;
+      window.open(frenetUrl, '_blank');
     }
   </script>
 

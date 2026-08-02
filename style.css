@@ -200,29 +200,8 @@ body {
 }
 
 .tracking-content.open {
-  max-height: 400px;
+  max-height: 140px;
   padding: 8px 16px 16px 16px;
-}
-
-.tracking-select-group {
-  margin-bottom: 8px;
-  width: 100%;
-}
-
-.tracking-select-group select {
-  width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #e2d8ce;
-  border-radius: 20px;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  outline: none;
-  background-color: #fff;
-  color: var(--color-text-dark);
-}
-
-.tracking-select-group select:focus {
-  border-color: var(--color-primary);
 }
 
 .tracking-input-group {
@@ -257,71 +236,14 @@ body {
 }
 
 .tracking-result {
-  margin-top: 14px;
+  margin-top: 8px;
   font-size: 12.5px;
-}
-
-.loading-msg, .error-msg {
-  text-align: center;
-  color: #666;
-  padding: 8px 0;
 }
 
 .error-msg {
-  color: #d32f2f;
-}
-
-.events-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-height: 220px;
-  overflow-y: auto;
-}
-
-.event-item {
-  background: var(--color-bg);
-  padding: 10px;
-  border-radius: 12px;
-  text-align: left;
-}
-
-.event-date {
-  font-size: 11px;
-  color: #777;
-}
-
-.event-desc {
-  font-size: 12.5px;
-  color: #1f1f1f;
-  margin: 2px 0;
-}
-
-.event-location {
-  font-size: 11px;
-  color: #555;
-}
-
-.direct-track {
   text-align: center;
-  padding: 10px 0;
-}
-
-.direct-track p {
-  font-size: 12px;
-  color: #555;
-  margin-bottom: 10px;
-}
-
-.track-direct-btn {
-  display: inline-block;
-  background-color: var(--color-primary);
-  color: #fff;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 12px;
+  color: #d32f2f;
+  padding: 4px 0;
 }
 
 .icon-wrapper {
