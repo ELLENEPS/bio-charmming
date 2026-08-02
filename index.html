@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- SDK do Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <!-- Canvas de Glitter Dourado -->
   <canvas id="glitterCanvas"></canvas>
@@ -218,6 +220,53 @@
 
   <!-- Scripts -->
   <script>
+
+// Configuração do Supabase (Substitua pelos seus dados reais)
+const SUPABASE_URL = 'https://bdrzkcszwtskHqwmjcoa.supabase.co'; // Ex: https://abcdef.supabase.co
+const SUPABASE_ANON_KEY = 'sb_publishable_v12kVObu91VsSmrUu2G2TQ_BMVZvotq'; // A chave sb_publishable_... que você copiou
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Função para carregar os dados do Supabase ao abrir a página
+async function carregarConfiguracoesDoSite() {
+  try {
+    const { data, error } = await supabaseClient
+      .from('site_config')
+      .select('chave, valor');
+
+    if (error) {
+      console.error('Erro ao buscar dados do Supabase:', error);
+      return;
+    }
+
+    if (data) {
+      data.forEach(item => {
+        // Atualiza o WhatsApp dinamicamente nos links
+        if (item.chave === 'whatsapp_numero') {
+          const linksWhatsapp = document.querySelectorAll('a[href*="wa.me"]');
+          linksWhatsapp.forEach(link => {
+            link.href = `https://wa.me/${item.valor}`;
+          });
+        }
+
+        // Atualiza o texto do cupom dinamicamente
+        if (item.chave === 'cupom_texto') {
+          const textoCupomEl = document.querySelector('.coupon-text');
+          if (textoCupomEl) {
+            // Mantém a estrutura com o cupom em destaque se necessário
+            textoCupomEl.innerHTML = `ganhe 10% de desconto usando o cupom <strong>BEMVINDA</strong> ${item.valor.replace('ganhe 10% de desconto usando o cupom BEMVINDA ', '')}`;
+          }
+        }
+      });
+    }
+  } catch (err) {
+    console.error('Erro de conexão:', err);
+  }
+}
+
+// Executa a busca assim que a página carregar
+document.addEventListener('DOMContentLoaded', carregarConfiguracoesDoSite);
+
     // Efeito de Glitter Dourado na Tela Inteira ao Copiar Cupom
     function triggerGoldGlitter() {
       const canvas = document.getElementById('glitterCanvas');

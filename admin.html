@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo - Charmming</title>
+  <!-- SDK do Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: 'Arial', sans-serif; background-color: #f4f6f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+    h2 { color: #333; margin-bottom: 20px; text-align: center; }
+    label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
+    input, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+    button { background: #ff4b72; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
+    button:hover { background: #e03e61; }
+    .hidden { display: none !important; }
+    #mensagem { text-align: center; margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- TELA DE LOGIN -->
+    <div id="login-container">
+      <h2>🔐 Login do Painel</h2>
+      <form id="login-form">
+        <label>E-mail:</label>
+        <input type="email" id="email" required placeholder="seu-email@gmail.com">
+        <label>Senha:</label>
+        <input type="password" id="password" required placeholder="Sua senha do Supabase">
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+
+    <!-- TELA DE EDIÇÃO (Aparece só após logar) -->
+    <div id="admin-container" class="hidden">
+      <h2>⚙️ Gerenciar Site</h2>
+      <form id="config-form">
+        <label>Número do WhatsApp (DDI+DDD+Número):</label>
+        <input type="text" id="whatsapp_input" required>
+        
+        <label>Texto do Cupom:</label>
+        <textarea id="cupom_input" rows="3" required></textarea>
+        
+        <button type="submit">Salvar Alterações</button>
+      </form>
+      <button id="btn-sair" style="background: #666; margin-top: 10px;">Sair</button>
+    </div>
+
+    <p id="mensagem"></p>
+  </div>
+
+  <script>
+    // Suas chaves do Supabase
+    const SUPABASE_URL = 'https://bdrzkcszwtskHqwmjcoa.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_v12kV0bu91VsSmrUu2G2TQ_BMVZv...'; // (Substitua se necessário)
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const loginContainer = document.getElementById('login-container');
+    const adminContainer = document.getElementById('admin-container');
+    const loginForm = document.getElementById('login-form');
+    const configForm = document.getElementById('config-form');
+    const msg = document.getElementById('mensagem');
+
+    // Verifica se já está logado
+    async function verificarSessao() {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      if (session) {
+        loginContainer.classList.add('hidden');
+        adminContainer.classList.remove('hidden');
+        carregarDadosAdmin();
+      }
+    }
+
+    // Processo de Login
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+      
+      if (error) {
+        msg.style.color = 'red';
+        msg.textContent = 'Erro ao entrar: E-mail ou senha incorretos.';
+      } else {
+        msg.textContent = '';
+        verificarSessao();
+      }
+    });
+
+    // Carrega os dados atuais para os campos de texto
+    async function carregarDadosAdmin() {
+      const { data, error } = await supabaseClient.from('site_config').select('chave, valor');
+      if (data) {
+        data.forEach(item => {
+          if (item.chave === 'whatsapp_numero') document.getElementById('whatsapp_input').value = item.valor;
+          if (item.chave === 'cupom_texto') document.getElementById('cupom_input').value = item.valor;
+        });
+      }
+    }
+
+    // Salvar alterações no banco de dados
+    configForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const novoZap = document.getElementById('whatsapp_input').value;
+      const novoCupom = document.getElementById('cupom_input').value;
+
+      // Atualiza WhatsApp
+      await supabaseClient.from('site_config').update({ valor: novoZap }).eq('chave', 'whatsapp_numero');
+      // Atualiza Cupom
+      await supabaseClient.from('site_config').update({ valor: novoCupom }).eq('chave', 'cupom_texto');
+
+      msg.style.color = 'green';
+      msg.textContent = 'Alterações salvas com sucesso!';
+      setTimeout(() => msg.textContent = '', 4000);
+    });
+
+    // Botão Sair
+    document.getElementById('btn-sair').addEventListener('click', async () => {
+      await supabaseClient.auth.signOut();
+      location.reload();
+    });
+
+    verificarSessao();
+  </script>
+</body>
+</html>
