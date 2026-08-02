@@ -1,0 +1,30 @@
+export default async function handler(req, res) {
+  const { code } = req.query;
+
+  if (!code) {
+    return res.status(400).json({ error: "Código de rastreio não fornecido." });
+  }
+
+  // Substitua 'SEU_TOKEN_FRENET_AQUI' pelo seu Token da Frenet
+  const FRENET_TOKEN = process.env.FRENET_TOKEN || "6EE2BA6BR8962R407CR8373R6D240F50509C";
+
+  try {
+    const response = await fetch(`https://api.frenet.com.br/tracking/trackinginfo?trackingNumber=${code}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "token": FRENET_TOKEN
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return res.status(response.status).json({ error: "Não foi possível consultar o rastreio na Frenet." });
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({ error: "Erro interno no servidor de rastreio." });
+  }
+}

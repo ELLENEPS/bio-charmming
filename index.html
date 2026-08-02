@@ -8,10 +8,10 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <!-- Google Fonts: Poppins -->
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Estilos customizados -->
   <link rel="stylesheet" href="style.css">
@@ -22,22 +22,23 @@
     
     <!-- Cabeçalho / Perfil -->
     <header class="header">
-      <!-- Logo Tipográfico Charmming -->
+      <!-- Logo Oficial da Marca -->
       <div class="logo-container">
-        <span class="logo-text">charm<br><span class="logo-sub">ming</span></span>
-        <div class="logo-fruit" aria-hidden="true"></div>
+        <img src="logo.png" alt="Logo Charmming" class="brand-logo">
       </div>
 
-      <h1 class="domain-title">charmming.com.br</h1>
-      <p class="subtitle">semijoias & personalizados</p>
-      <p class="subtitle highlight">enviamos para todo o Brasil</p>
+      <!-- Subtítulo -->
+      <p class="subtitle">Semijoias & Personalizados</p>
+      
+      <!-- Container Brasil Verde -->
+      <div class="shipping-badge">
+        <span>enviamos para todo o Brasil</span>
+      </div>
 
-      <!-- Badge de Cupom -->
-      <div class="coupon-badge">
-        <svg class="tag-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
-        </svg>
-        <span>cupom <strong>BEMVINDA</strong> para 10% off</span>
+      <!-- Componente de Cupom Centralizado -->
+      <div class="coupon-container">
+        <span class="coupon-text">ganhe 10% de desconto usando o cupom <strong>BEMVINDA</strong> em sua primeira compra no site!</span>
+        <button id="copyBtn" class="copy-button" onclick="copyCoupon()">copiar cupom</button>
       </div>
     </header>
 
@@ -67,6 +68,31 @@
         <span class="link-label">peças personalizadas</span>
         <div class="dots-menu" aria-hidden="true"><span></span><span></span><span></span></div>
       </a>
+
+      <!-- CARD DE RASTREIO FRENET -->
+      <div class="tracking-card">
+        <div class="tracking-header" onclick="toggleTracking()">
+          <div class="icon-wrapper outline-pink">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f07ba5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <span class="link-label">rastrear meu pedido</span>
+          <svg class="chevron-icon" id="trackingChevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+
+        <!-- Área Expansível do Rastreio -->
+        <div class="tracking-content" id="trackingContent">
+          <div class="tracking-input-group">
+            <input type="text" id="trackingCodeInput" placeholder="Digite seu código de rastreio..." />
+            <button onclick="fetchTracking()">Buscar</button>
+          </div>
+          <div id="trackingResult" class="tracking-result"></div>
+        </div>
+      </div>
 
       <!-- Link 3: SALE -->
       <a href="https://charmming.com.br" class="link-card" target="_blank" rel="noopener">
@@ -110,7 +136,7 @@
 
     </nav>
 
-    <!-- Rodapé: Redes Sociais -->
+    <!-- Rodapé: Redes Sociais em Outline Preto -->
     <footer class="social-footer">
       <!-- Instagram -->
       <a href="https://instagram.com/charmming" target="_blank" rel="noopener" aria-label="Instagram">
@@ -124,19 +150,85 @@
       <!-- WhatsApp -->
       <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" aria-label="WhatsApp">
         <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
         </svg>
       </a>
 
       <!-- TikTok -->
       <a href="https://tiktok.com/@charmming" target="_blank" rel="noopener" aria-label="TikTok">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 1 1-2.896-2.896c.244 0 .482.03.71.087V9.36a6.34 6.34 0 0 0-.71-.04 6.341 6.341 0 1 0 6.341 6.341V8.621A8.18 8.18 0 0 0 20 9.421V5.986a4.808 4.808 0 0 1-.411.7z"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
         </svg>
       </a>
     </footer>
 
   </main>
+
+  <!-- Scripts -->
+  <script>
+    // Script para Copiar Cupom
+    function copyCoupon() {
+      const couponCode = "BEMVINDA";
+      const btn = document.getElementById("copyBtn");
+      
+      navigator.clipboard.writeText(couponCode).then(() => {
+        btn.classList.add("copied");
+        btn.innerText = "Copiado!";
+        
+        setTimeout(() => {
+          btn.classList.remove("copied");
+          btn.innerText = "copiar cupom";
+        }, 2500);
+      }).catch(err => {
+        console.error("Erro ao copiar: ", err);
+      });
+    }
+
+    // Toggle para expandir/recolher a caixinha de Rastreio
+    function toggleTracking() {
+      const content = document.getElementById("trackingContent");
+      const chevron = document.getElementById("trackingChevron");
+      content.classList.toggle("open");
+      chevron.classList.toggle("open");
+    }
+
+    // Consulta de Rastreio na Serverless Function
+    async function fetchTracking() {
+      const codeInput = document.getElementById("trackingCodeInput").value.trim();
+      const resultDiv = document.getElementById("trackingResult");
+
+      if (!codeInput) {
+        resultDiv.innerHTML = `<p class="error-msg">Por favor, digite um código de rastreio.</p>`;
+        return;
+      }
+
+      resultDiv.innerHTML = `<p class="loading-msg">Consultando rastreio...</p>`;
+
+      try {
+        const response = await fetch(`/api/tracking?code=${encodeURIComponent(codeInput)}`);
+        const data = await response.json();
+
+        if (response.ok && data.TrackingEvents && data.TrackingEvents.length > 0) {
+          let eventsHTML = `<div class="events-list">`;
+          data.TrackingEvents.forEach(evt => {
+            eventsHTML += `
+              <div class="event-item">
+                <div class="event-date">${evt.EventDateTime || ''}</div>
+                <div class="event-desc"><strong>${evt.EventDescription || ''}</strong></div>
+                <div class="event-location">${evt.EventLocation || ''}</div>
+              </div>
+            `;
+          });
+          eventsHTML += `</div>`;
+          resultDiv.innerHTML = eventsHTML;
+        } else {
+          resultDiv.innerHTML = `<p class="error-msg">Nenhuma movimentação encontrada para este código.</p>`;
+        }
+      } catch (err) {
+        resultDiv.innerHTML = `<p class="error-msg">Erro ao realizar a busca. Tente novamente.</p>`;
+      }
+    }
+  </script>
 
 </body>
 </html>
