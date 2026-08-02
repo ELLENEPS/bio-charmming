@@ -18,6 +18,9 @@
 </head>
 <body>
 
+  <!-- Canvas de Glitter Dourado -->
+  <canvas id="glitterCanvas"></canvas>
+
   <main class="container">
     
     <!-- Cabeçalho / Perfil -->
@@ -46,7 +49,7 @@
     <nav class="links-nav">
       
       <!-- Link 1: Destaque Rosa -->
-      <a href="https://charmming.com.br" class="link-card main-highlight" target="_blank" rel="noopener">
+      <a href="https://www.charmming.com.br" class="link-card main-highlight" target="_blank" rel="noopener">
         <div class="icon-wrapper pink-filled">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="9" cy="21" r="1"></circle>
@@ -59,59 +62,95 @@
       </a>
 
       <!-- Link 2: Peças Personalizadas -->
-      <a href="https://charmming.com.br" class="link-card" target="_blank" rel="noopener">
+      <a href="https://www.charmming.com.br/personalizados-1?page=1" class="link-card" target="_blank" rel="noopener">
         <div class="icon-wrapper outline-pink">
           <svg viewBox="0 0 24 24" fill="none" stroke="#f07ba5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
           </svg>
         </div>
         <span class="link-label">peças personalizadas</span>
         <div class="dots-menu" aria-hidden="true"><span></span><span></span><span></span></div>
       </a>
 
-      <!-- CARD DE RASTREIO FRENET (DIRETO) -->
-      <div class="tracking-card">
-        <div class="tracking-header" onclick="toggleTracking()">
-          <div class="icon-wrapper outline-pink">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#f07ba5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="1" y="3" width="15" height="13"></rect>
-              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-              <circle cx="5.5" cy="18.5" r="2.5"></circle>
-              <circle cx="18.5" cy="18.5" r="2.5"></circle>
-            </svg>
-          </div>
-          <span class="link-label">rastrear meu pedido</span>
-          <svg class="chevron-icon" id="trackingChevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </div>
-
-        <!-- Área Expansível do Rastreio -->
-        <div class="tracking-content" id="trackingContent">
-          <div class="tracking-input-group">
-            <input type="text" id="trackingCodeInput" placeholder="Digite seu código de rastreio..." />
-            <button onclick="redirectToFrenet()">Rastrear</button>
-          </div>
-          <div id="trackingResult" class="tracking-result"></div>
-        </div>
-      </div>
-
       <!-- Link 3: SALE -->
-      <a href="https://charmming.com.br" class="link-card" target="_blank" rel="noopener">
+      <a href="https://www.charmming.com.br/produtos?promotion=1&page=1" class="link-card" target="_blank" rel="noopener">
         <div class="icon-wrapper outline-pink">
           <svg viewBox="0 0 24 24" fill="none" stroke="#f07ba5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
           </svg>
         </div>
         <span class="link-label">SALE - produtos com até 40% de desconto</span>
         <div class="dots-menu" aria-hidden="true"><span></span><span></span><span></span></div>
       </a>
 
-      <!-- Divisor de Seção -->
-      <div class="section-title">atendimento:</div>
+      <!-- SEÇÃO 1: NOSSOS DESTAQUES -->
+      <div class="section-title">NOSSOS DESTAQUES</div>
+      
+      <div class="carousel-wrapper">
+        <div class="carousel-container" id="carouselContainer">
+          <div class="carousel-track">
+            
+            <!-- Produto 1 -->
+            <div class="product-card">
+              <div class="product-image-container">
+                <img src="Chaveiro Personalizado Aço Inoxidável Retangular.png" alt="CHAVEIRO PERSONALIZADO AÇO INOXIDÁVEL RETANGULAR" class="product-img">
+              </div>
+              <span class="product-name">CHAVEIRO PERSONALIZADO AÇO INOXIDÁVEL RETANGULAR</span>
+              <a href="https://www.charmming.com.br/chaveiro-personalizado-aco-inoxidavel" target="_blank" rel="noopener" class="buy-button">
+                <span>comprar</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </div>
+
+            <!-- Produto 2 -->
+            <div class="product-card">
+              <div class="product-image-container">
+                <img src="Colar Personalizado Inicial Coração Banhado a Ouro.png" alt="COLAR PERSONALIZADO INICIAL CORAÇÃO BANHADO A OURO" class="product-img">
+              </div>
+              <span class="product-name">COLAR PERSONALIZADO INICIAL CORAÇÃO BANHADO A OURO</span>
+              <a href="https://www.charmming.com.br/colar-personalizado-inicial-coracao-banhado-a-ouro" target="_blank" rel="noopener" class="buy-button">
+                <span>comprar</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </div>
+
+            <!-- Produto 3 -->
+            <div class="product-card">
+              <div class="product-image-container">
+                <img src="Colar Relicário My Heart Banhado a Ouro 18K.png" alt="COLAR RELICÁRIO MY HEART BANHADO A OURO 18K" class="product-img">
+              </div>
+              <span class="product-name">COLAR RELICÁRIO MY HEART BANHADO A OURO 18K</span>
+              <a href="https://www.charmming.com.br/colar-relicario-my-heart-banhado-a-ouro-18k" target="_blank" rel="noopener" class="buy-button">
+                <span>comprar</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </div>
+
+            <!-- Produto 4 -->
+            <div class="product-card">
+              <div class="product-image-container">
+                <img src="Relicário Infinity Banhado a Ouro 18K.png" alt="RELICÁRIO INFINITY BANHADO A OURO 18K" class="product-img">
+              </div>
+              <span class="product-name">RELICÁRIO INFINITY BANHADO A OURO 18K</span>
+              <a href="https://www.charmming.com.br/relicario-infinity-banhado-a-ouro-18k" target="_blank" rel="noopener" class="buy-button">
+                <span>comprar</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Bolinhas Indicadoras de Paginação -->
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+
+      <!-- SEÇÃO 2: ATENDIMENTO -->
+      <div class="section-title">ATENDIMENTO</div>
 
       <!-- Link 4: WhatsApp -->
-      <a href="https://wa.me/5500000000000" class="link-card" target="_blank" rel="noopener">
+      <a href="https://wa.me/5511976672214" class="link-card" target="_blank" rel="noopener">
         <div class="icon-wrapper outline-pink">
           <svg viewBox="0 0 24 24" fill="none" stroke="#f07ba5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -122,7 +161,7 @@
       </a>
 
       <!-- Link 5: Cuidados -->
-      <a href="https://charmming.com.br" class="link-card" target="_blank" rel="noopener">
+      <a href="https://www.charmming.com.br/faq" class="link-card" target="_blank" rel="noopener">
         <div class="icon-wrapper outline-pink">
           <svg viewBox="0 0 24 24" fill="none" stroke="#f07ba5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
@@ -134,31 +173,44 @@
         <div class="dots-menu" aria-hidden="true"><span></span><span></span><span></span></div>
       </a>
 
+      <!-- Link 6: Rastreio -->
+      <a href="https://rastreio.frenet.com.br/" class="link-card" target="_blank" rel="noopener">
+        <div class="icon-wrapper outline-pink">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f07ba5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+        </div>
+        <span class="link-label">rastrear meu pedido</span>
+        <div class="dots-menu" aria-hidden="true"><span></span><span></span><span></span></div>
+      </a>
+
+      <!-- SEÇÃO 3: EXPERIÊNCIA DE COMPRA (VÍDEO) -->
+      <div class="section-title">EXPERIÊNCIA DE COMPRA</div>
+
+      <div class="video-card">
+        <video controls playsinline preload="metadata" class="experience-video">
+          <source src="experiencia.mp4" type="video/mp4">
+          Seu navegador não suporta a exibição deste vídeo.
+        </video>
+      </div>
+
     </nav>
 
-    <!-- Rodapé: Redes Sociais em Outline Preto -->
+    <!-- Rodapé: Redes Sociais com Imagens PNG Próprias -->
     <footer class="social-footer">
-      <!-- Instagram -->
-      <a href="https://instagram.com/charmming" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
+      <a href="https://www.instagram.com/charmming.com.br/" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="icone-instagram.png" alt="Instagram" class="social-icon">
       </a>
 
-      <!-- WhatsApp -->
-      <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-        </svg>
+      <a href="https://wa.me/5511976672214" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <img src="icone-whatsapp.png" alt="WhatsApp" class="social-icon">
       </a>
 
-      <!-- TikTok -->
-      <a href="https://tiktok.com/@charmming" target="_blank" rel="noopener" aria-label="TikTok">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
-        </svg>
+      <a href="https://tiktok.com/@charmming.com.br" target="_blank" rel="noopener" aria-label="TikTok">
+        <img src="icone-tiktok.png" alt="TikTok" class="social-icon">
       </a>
     </footer>
 
@@ -166,7 +218,110 @@
 
   <!-- Scripts -->
   <script>
-    // Script para Copiar Cupom
+    // Efeito de Glitter Dourado na Tela Inteira ao Copiar Cupom
+    function triggerGoldGlitter() {
+      const canvas = document.getElementById('glitterCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const particleCount = 65; // Quantidade de fagulhas de glitter
+      const goldColors = ['#ffd700', '#ffea70', '#e6c619', '#fff5b8', '#d4af37'];
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height * 0.7, // Concentra mais da metade pra cima
+          radius: Math.random() * 3 + 1.5,
+          color: goldColors[Math.floor(Math.random() * goldColors.length)],
+          vx: (Math.random() - 0.5) * 2,
+          vy: Math.random() * -1.5 - 0.5, // Leve subida
+          alpha: 1,
+          decay: Math.random() * 0.015 + 0.01,
+          rotation: Math.random() * Math.PI,
+          spin: (Math.random() - 0.5) * 0.2,
+          isStar: Math.random() > 0.4 // 60% partículas, 40% formato estrela/brilho
+        });
+      }
+
+      let animationFrame;
+
+      function drawStar(cx, cy, spikes, outerRadius, innerRadius, color, alpha, angle) {
+        let rot = Math.PI / 2 * 3;
+        let x = cx;
+        let y = cy;
+        let step = Math.PI / spikes;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.translate(cx, cy);
+        ctx.rotate(angle);
+        ctx.translate(-cx, -cy);
+        ctx.moveTo(cx, cy - outerRadius);
+
+        for (let i = 0; i < spikes; i++) {
+          x = cx + Math.cos(rot) * outerRadius;
+          y = cy + Math.sin(rot) * outerRadius;
+          ctx.lineTo(x, y);
+          rot += step;
+
+          x = cx + Math.cos(rot) * innerRadius;
+          y = cy + Math.sin(rot) * innerRadius;
+          ctx.lineTo(x, y);
+          rot += step;
+        }
+
+        ctx.lineTo(cx, cy - outerRadius);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.globalAlpha = alpha;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let activeParticles = 0;
+
+        particles.forEach(p => {
+          if (p.alpha > 0) {
+            activeParticles++;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.alpha -= p.decay;
+            p.rotation += p.spin;
+
+            if (p.alpha < 0) p.alpha = 0;
+
+            if (p.isStar) {
+              drawStar(p.x, p.y, 4, p.radius * 2.5, p.radius * 0.8, p.color, p.alpha, p.rotation);
+            } else {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+              ctx.fillStyle = p.color;
+              ctx.globalAlpha = p.alpha;
+              ctx.shadowBlur = 8;
+              ctx.shadowColor = '#ffd700';
+              ctx.fill();
+              ctx.shadowBlur = 0;
+            }
+          }
+        });
+
+        if (activeParticles > 0) {
+          animationFrame = requestAnimationFrame(animate);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          cancelAnimationFrame(animationFrame);
+        }
+      }
+
+      animate();
+    }
+
+    // Script Copiar Cupom
     function copyCoupon() {
       const couponCode = "BEMVINDA";
       const btn = document.getElementById("copyBtn");
@@ -174,6 +329,9 @@
       navigator.clipboard.writeText(couponCode).then(() => {
         btn.classList.add("copied");
         btn.innerText = "Copiado!";
+        
+        // Dispara o Brilho/Glitter Dourado
+        triggerGoldGlitter();
         
         setTimeout(() => {
           btn.classList.remove("copied");
@@ -184,30 +342,74 @@
       });
     }
 
-    // Toggle para expandir/recolher a caixinha de Rastreio
-    function toggleTracking() {
-      const content = document.getElementById("trackingContent");
-      const chevron = document.getElementById("trackingChevron");
-      content.classList.toggle("open");
-      chevron.classList.toggle("open");
-    }
+    // Script Carrossel Paginado Dinâmico
+    const container = document.getElementById('carouselContainer');
+    const dotsContainer = document.getElementById('carouselDots');
+    const cards = document.querySelectorAll('.product-card');
 
-    // Redirecionamento Direto para o Rastreio Oficial da Frenet
-    function redirectToFrenet() {
-      const codeInput = document.getElementById("trackingCodeInput").value.trim();
-      const resultDiv = document.getElementById("trackingResult");
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-      if (!codeInput) {
-        resultDiv.innerHTML = `<p class="error-msg">Por favor, digite seu código de rastreio.</p>`;
-        return;
+    function buildDots() {
+      dotsContainer.innerHTML = '';
+      if (cards.length === 0) return;
+
+      const containerWidth = container.clientWidth;
+      const cardWidth = cards[0].offsetWidth + 12;
+      const cardsPerPage = Math.max(1, Math.floor(containerWidth / cardWidth));
+      const totalPages = Math.ceil(cards.length / cardsPerPage);
+
+      for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dotsContainer.appendChild(dot);
       }
-
-      resultDiv.innerHTML = "";
-      
-      // Abre a página oficial de rastreio da Frenet em uma nova aba com o código preenchido
-      const frenetUrl = `https://rastreio.frenet.com.br/?tracking=${encodeURIComponent(codeInput)}`;
-      window.open(frenetUrl, '_blank');
     }
+
+    container.addEventListener('mousedown', (e) => {
+      isDown = true;
+      container.classList.add('active');
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isDown = false;
+      container.classList.remove('active');
+    });
+
+    container.addEventListener('mouseup', () => {
+      isDown = false;
+      container.classList.remove('active');
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 2;
+      container.scrollLeft = scrollLeft - walk;
+    });
+
+    container.addEventListener('scroll', () => {
+      const dots = dotsContainer.querySelectorAll('.dot');
+      if (dots.length === 0) return;
+
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      if (maxScroll <= 0) return;
+      
+      const scrollFraction = container.scrollLeft / maxScroll;
+      const activeIndex = Math.min(Math.round(scrollFraction * (dots.length - 1)), dots.length - 1);
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === activeIndex);
+      });
+    });
+
+    window.addEventListener('resize', buildDots);
+    window.addEventListener('load', buildDots);
   </script>
 
 </body>
