@@ -89,7 +89,6 @@
           <!-- Seleção de Transportadora -->
           <div class="tracking-select-group">
             <select id="carrierSelect">
-              <option value="">Selecione a transportadora...</option>
               <option value="CORREIOS">Correios</option>
               <option value="JT">J&T Express</option>
               <option value="JADLOG">Jadlog</option>
@@ -113,7 +112,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="#f07ba5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
             <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
           </svg>
         </div>
         <span class="link-label">SALE - produtos com até 40% de desconto</span>
@@ -179,7 +178,6 @@
 
   <!-- Scripts -->
   <script>
-    // Script para Copiar Cupom
     function copyCoupon() {
       const couponCode = "BEMVINDA";
       const btn = document.getElementById("copyBtn");
@@ -197,7 +195,6 @@
       });
     }
 
-    // Toggle para expandir/recolher a caixinha de Rastreio
     function toggleTracking() {
       const content = document.getElementById("trackingContent");
       const chevron = document.getElementById("trackingChevron");
@@ -205,7 +202,6 @@
       chevron.classList.toggle("open");
     }
 
-    // Consulta de Rastreio na Serverless API
     async function fetchTracking() {
       const codeInput = document.getElementById("trackingCodeInput").value.trim();
       const carrierSelect = document.getElementById("carrierSelect").value;
@@ -226,18 +222,28 @@
         if (response.ok && data.TrackingEvents && data.TrackingEvents.length > 0) {
           let eventsHTML = `<div class="events-list">`;
           data.TrackingEvents.forEach(evt => {
+            const date = evt.EventDateTime || evt.date || '';
+            const desc = evt.EventDescription || evt.description || evt.Status || '';
+            const loc = evt.EventLocation || evt.location || '';
             eventsHTML += `
               <div class="event-item">
-                <div class="event-date">${evt.EventDateTime || ''}</div>
-                <div class="event-desc"><strong>${evt.EventDescription || ''}</strong></div>
-                <div class="event-location">${evt.EventLocation || ''}</div>
+                <div class="event-date">${date}</div>
+                <div class="event-desc"><strong>${desc}</strong></div>
+                <div class="event-location">${loc}</div>
               </div>
             `;
           });
           eventsHTML += `</div>`;
           resultDiv.innerHTML = eventsHTML;
+        } else if (data.directUrl) {
+          resultDiv.innerHTML = `
+            <div class="direct-track">
+              <p>${data.message}</p>
+              <a href="${data.directUrl}" target="_blank" rel="noopener" class="track-direct-btn">Abrir Rastreio Oficial</a>
+            </div>
+          `;
         } else {
-          resultDiv.innerHTML = `<p class="error-msg">Nenhuma movimentação encontrada. Verifique a transportadora ou o código digitado.</p>`;
+          resultDiv.innerHTML = `<p class="error-msg">Nenhuma movimentação localizada no momento. Verifique o código e a transportadora.</p>`;
         }
       } catch (err) {
         resultDiv.innerHTML = `<p class="error-msg">Erro ao realizar a busca. Tente novamente.</p>`;

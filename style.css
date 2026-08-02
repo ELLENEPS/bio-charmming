@@ -32,7 +32,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 440px; /* Largura ideal tipo mobile/Linktree */
+  max-width: 440px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,7 +71,6 @@ body {
   letter-spacing: -0.1px;
 }
 
-/* Badge enviamos para todo o Brasil (Verde Suave) */
 .shipping-badge {
   display: inline-flex;
   align-items: center;
@@ -89,7 +88,6 @@ body {
   color: #1b5e20;
 }
 
-/* Container de Cupom Copiável (Centralizado) */
 .coupon-container {
   width: 100%;
   display: flex;
@@ -166,7 +164,6 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Card de Rastreio Frenet */
 .tracking-card {
   background-color: var(--color-card-bg);
   border-radius: 30px;
@@ -305,6 +302,28 @@ body {
   color: #555;
 }
 
+.direct-track {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.direct-track p {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.track-direct-btn {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
 .icon-wrapper {
   width: 46px;
   height: 46px;
@@ -364,7 +383,7 @@ body {
 }
 
 /* ==========================================================================
-   RODAPÉ SOCIAL (Outline Preto Fino)
+   RODAPÉ SOCIAL
    ========================================================================== */
 .social-footer {
   display: flex;
