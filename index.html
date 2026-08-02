@@ -191,10 +191,10 @@
       <div class="section-title">EXPERIÊNCIA DE COMPRA</div>
 
       <div class="video-card">
-        <video controls playsinline preload="metadata" class="experience-video">
-          <source src="experiencia.mp4" type="video/mp4">
-          Seu navegador não suporta a exibição deste vídeo.
-        </video>
+        <video id="experienceVideo" muted loop playsinline preload="metadata" class="experience-video">
+  <source src="experiencia.mp4" type="video/mp4">
+  Seu navegador não suporta a exibição deste vídeo.
+</video>
       </div>
 
     </nav>
@@ -410,6 +410,39 @@
 
     window.addEventListener('resize', buildDots);
     window.addEventListener('load', buildDots);
+  </script>
+
+<!-- Scripts -->
+  <script>
+    // Script Copiar Cupom
+    function copyCoupon() {
+      // ... (código que você já tem)
+    }
+
+    // Script Carrossel Paginado Dinâmico
+    // ... (código que você já tem)
+
+    // COLE O NOVO SCRIPT AQUI EMBAIXO:
+    document.addEventListener("DOMContentLoaded", function() {
+      const video = document.getElementById('experienceVideo');
+      if (!video) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            video.play().catch(error => {
+              console.log("Autoplay impedido pelo navegador:", error);
+            });
+          } else {
+            video.pause();
+          }
+        });
+      }, {
+        threshold: 0.5 // Dispara quando 50% do vídeo aparecer na tela
+      });
+
+      observer.observe(video);
+    });
   </script>
 
 </body>
