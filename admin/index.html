@@ -4,13 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel de Controle - Charmming</title>
+  <!-- Carrega o motor do StaticCMS (sem bugs de DOM) -->
+  <script src="https://unpkg.com/@staticcms/core@^1.0.0/dist/static-cms-app.js"></script>
 </head>
 <body>
-  <!-- Script do Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
-  
   <script>
-    // Configuração injetada diretamente no JS para evitar erro 404 de arquivo externo
+    // Inicializa o painel conectado direto ao GitHub da sua loja
     CMS.init({
       config: {
         backend: {
