@@ -1,7 +1,7 @@
 backend:
   name: github
-  repo: "ELLENEPS/bio-charmming" # Substitua pelo seu usuário e nome do repositório no GitHub
-  branch: main # A ramificação principal do seu projeto (geralmente main ou master)
+  repo: ELLENEPS/bio-charmming
+  branch: main
 
 media_folder: "images"
 public_folder: "/images"
@@ -19,16 +19,7 @@ collections:
             widget: "string"
             hint: "Texto que aparece no banner rosa de desconto do topo"
           
-          - label: "Número do WhatsApp (Atendimento e Rodapé)"
+          - label: "Número do WhatsApp"
             name: "whatsapp_numero"
             widget: "string"
-            hint: "Exemplo: 5583999999999 (apenas números com DDI e DDD)"
-
-          - label: "Lista de Links Principais"
-            name: "links_principais"
-            widget: "list"
-            fields:
-              - { label: "Nome do Botão", name: "titulo", widget: "string" }
-              - { label: "Link de Destino (URL)", name: "url", widget: "string" }
-
-          - { label: "Produtos em Destaque (Carrossel)", ... } # (mantenha os campos que você já tinha dos produtos)
+            hint: "Exemplo: 5511976672214"
