@@ -18,7 +18,6 @@ collections:
             name: "cupom_texto"
             widget: "string"
             hint: "Texto que aparece no banner rosa de desconto do topo"
-          
           - label: "Número do WhatsApp"
             name: "whatsapp_numero"
             widget: "string"
