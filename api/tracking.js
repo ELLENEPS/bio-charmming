@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   // Token oficial da Frenet
   const FRENET_TOKEN = process.env.FRENET_TOKEN || "6EE2BA6BR8962R407CR8373R6D240F50509C";
 
-  // Monta a URL com a transportadora selecionada (se houver)
+  // Monta a URL de consulta na API da Frenet
   let url = `https://api.frenet.com.br/tracking/trackinginfo?trackingNumber=${encodeURIComponent(code)}`;
   if (service) {
     url += `&shippingServiceCode=${encodeURIComponent(service)}`;
