@@ -207,10 +207,30 @@ body {
   padding: 8px 16px 16px 16px;
 }
 
+.tracking-select-group {
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.tracking-select-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #e2d8ce;
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+  background-color: #fff;
+  color: var(--color-text-dark);
+}
+
+.tracking-select-group select:focus {
+  border-color: var(--color-primary);
+}
+
 .tracking-input-group {
   display: flex;
   gap: 8px;
-  margin-top: 4px;
 }
 
 .tracking-input-group input {

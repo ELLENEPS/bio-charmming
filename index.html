@@ -86,8 +86,23 @@
 
         <!-- Área Expansível do Rastreio -->
         <div class="tracking-content" id="trackingContent">
+          <!-- Seleção de Transportadora -->
+          <div class="tracking-select-group">
+            <select id="carrierSelect">
+              <option value="">Selecione a transportadora...</option>
+              <option value="CORREIOS">Correios</option>
+              <option value="JADLOG">Jadlog</option>
+              <option value="LOGGI">Loggi</option>
+              <option value="TOTALEXPRESS">Total Express</option>
+              <option value="AZUL">Azul Cargo</option>
+              <option value="LATAM">LATAM Cargo</option>
+              <option value="MELHOR_ENVIO">Outra / Padrão</option>
+            </select>
+          </div>
+
+          <!-- Campo de Código e Botão -->
           <div class="tracking-input-group">
-            <input type="text" id="trackingCodeInput" placeholder="Digite seu código de rastreio..." />
+            <input type="text" id="trackingCodeInput" placeholder="Digite seu código..." />
             <button onclick="fetchTracking()">Buscar</button>
           </div>
           <div id="trackingResult" class="tracking-result"></div>
@@ -192,20 +207,22 @@
       chevron.classList.toggle("open");
     }
 
-    // Consulta de Rastreio na Serverless Function
+    // Consulta de Rastreio na Serverless API
     async function fetchTracking() {
       const codeInput = document.getElementById("trackingCodeInput").value.trim();
+      const carrierSelect = document.getElementById("carrierSelect").value;
       const resultDiv = document.getElementById("trackingResult");
 
       if (!codeInput) {
-        resultDiv.innerHTML = `<p class="error-msg">Por favor, digite um código de rastreio.</p>`;
+        resultDiv.innerHTML = `<p class="error-msg">Por favor, digite o código de rastreio.</p>`;
         return;
       }
 
       resultDiv.innerHTML = `<p class="loading-msg">Consultando rastreio...</p>`;
 
       try {
-        const response = await fetch(`/api/tracking?code=${encodeURIComponent(codeInput)}`);
+        const url = `/api/tracking?code=${encodeURIComponent(codeInput)}&service=${encodeURIComponent(carrierSelect)}`;
+        const response = await fetch(url);
         const data = await response.json();
 
         if (response.ok && data.TrackingEvents && data.TrackingEvents.length > 0) {
@@ -222,7 +239,7 @@
           eventsHTML += `</div>`;
           resultDiv.innerHTML = eventsHTML;
         } else {
-          resultDiv.innerHTML = `<p class="error-msg">Nenhuma movimentação encontrada para este código.</p>`;
+          resultDiv.innerHTML = `<p class="error-msg">Nenhuma movimentação encontrada. Verifique a transportadora ou o código digitado.</p>`;
         }
       } catch (err) {
         resultDiv.innerHTML = `<p class="error-msg">Erro ao realizar a busca. Tente novamente.</p>`;

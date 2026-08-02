@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  const { code } = req.query;
+  const { code, service } = req.query;
 
   if (!code) {
     return res.status(400).json({ error: "Código de rastreio não fornecido." });
@@ -8,8 +8,14 @@ export default async function handler(req, res) {
   // Token oficial da Frenet
   const FRENET_TOKEN = process.env.FRENET_TOKEN || "6EE2BA6BR8962R407CR8373R6D240F50509C";
 
+  // Monta a URL com a transportadora selecionada (se houver)
+  let url = `https://api.frenet.com.br/tracking/trackinginfo?trackingNumber=${encodeURIComponent(code)}`;
+  if (service) {
+    url += `&shippingServiceCode=${encodeURIComponent(service)}`;
+  }
+
   try {
-    const response = await fetch(`https://api.frenet.com.br/tracking/trackinginfo?trackingNumber=${encodeURIComponent(code)}`, {
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Accept": "application/json",
