@@ -6,8 +6,39 @@
   <title>Painel de Controle - Charmming</title>
 </head>
 <body>
-  <!-- Usando a versão mais estável do Decap CMS -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <!-- Script do Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+  
+  <script>
+    // Configuração injetada diretamente no JS para evitar erro 404 de arquivo externo
+    CMS.init({
+      config: {
+        backend: {
+          name: "github",
+          repo: "ELLENEPS/bio-charmming",
+          branch: "main"
+        },
+        media_folder: "images",
+        public_folder: "/images",
+        collections: [
+          {
+            name: "conteudo_site",
+            label: "Gerenciar Site",
+            files: [
+              {
+                file: "index.html",
+                label: "Página Principal",
+                name: "index",
+                fields: [
+                  { label: "Cupom de Desconto (Texto)", name: "cupom_texto", widget: "string" },
+                  { label: "Número do WhatsApp", name: "whatsapp_numero", widget: "string" }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    });
+  </script>
 </body>
 </html>
