@@ -192,9 +192,9 @@
 
       <div class="video-card">
         <video id="experienceVideo" muted loop playsinline preload="metadata" class="experience-video">
-  <source src="experiencia.mp4" type="video/mp4">
-  Seu navegador não suporta a exibição deste vídeo.
-</video>
+          <source src="experiencia.mp4" type="video/mp4">
+          Seu navegador não suporta a exibição deste vídeo.
+        </video>
       </div>
 
     </nav>
@@ -227,22 +227,22 @@
       canvas.height = window.innerHeight;
 
       const particles = [];
-      const particleCount = 65; // Quantidade de fagulhas de glitter
+      const particleCount = 65;
       const goldColors = ['#ffd700', '#ffea70', '#e6c619', '#fff5b8', '#d4af37'];
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height * 0.7, // Concentra mais da metade pra cima
+          y: Math.random() * canvas.height * 0.7,
           radius: Math.random() * 3 + 1.5,
           color: goldColors[Math.floor(Math.random() * goldColors.length)],
           vx: (Math.random() - 0.5) * 2,
-          vy: Math.random() * -1.5 - 0.5, // Leve subida
+          vy: Math.random() * -1.5 - 0.5,
           alpha: 1,
           decay: Math.random() * 0.015 + 0.01,
           rotation: Math.random() * Math.PI,
           spin: (Math.random() - 0.5) * 0.2,
-          isStar: Math.random() > 0.4 // 60% partículas, 40% formato estrela/brilho
+          isStar: Math.random() > 0.4
         });
       }
 
@@ -330,7 +330,6 @@
         btn.classList.add("copied");
         btn.innerText = "Copiado!";
         
-        // Dispara o Brilho/Glitter Dourado
         triggerGoldGlitter();
         
         setTimeout(() => {
@@ -410,19 +409,8 @@
 
     window.addEventListener('resize', buildDots);
     window.addEventListener('load', buildDots);
-  </script>
 
-<!-- Scripts -->
-  <script>
-    // Script Copiar Cupom
-    function copyCoupon() {
-      // ... (código que você já tem)
-    }
-
-    // Script Carrossel Paginado Dinâmico
-    // ... (código que você já tem)
-
-    // COLE O NOVO SCRIPT AQUI EMBAIXO:
+    // Script Autoplay do Vídeo baseado na Rolagem da Tela
     document.addEventListener("DOMContentLoaded", function() {
       const video = document.getElementById('experienceVideo');
       if (!video) return;
@@ -438,7 +426,7 @@
           }
         });
       }, {
-        threshold: 0.5 // Dispara quando 50% do vídeo aparecer na tela
+        threshold: 0.5
       });
 
       observer.observe(video);
